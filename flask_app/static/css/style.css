@@ -1,0 +1,14 @@
+h1 {
+    color:blue;
+}
+
+body{
+    background-color: aquamarine;
+}
+
+.user {
+    border:2px solid black;
+    padding:5px;
+    width:300px;
+    display:inline-block;
+}

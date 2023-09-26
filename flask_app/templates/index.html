@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}" />
+</head>
+<body>
+    <h1>First Flask App! Welcome {{session['user']}}!</h1>
+
+    {% for user in users %}
+        <div class="user">
+            <h1><a href="/user/{{user.id}}">{{user.username}}</a></h1>
+            <p>{{user.email}}</p>
+            <p>{{user.age}}</p>
+            <p>{{user.country}}</p>
+            <a href="/user/{{user.id}}/edit">Edit</a>
+            <a href="/user/{{user.id}}/delete">Delete</a>
+        </div>
+    {% endfor %}
+
+
+</body>
+</html>

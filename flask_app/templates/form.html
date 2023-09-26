@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Welcome {{session['user']}}, Register a new user!</h1>
+
+    <form action="/user" method="post">
+        <label for="user_name">Username:</label>
+        <input type="text" name="username" id="user_name">
+        <label for="email">Email:</label>
+        <input type="text" name="email" id="email" placeholder="Add your username here">
+        <label for="age">Age:</label>
+        <input type="number" name="age" id="age">
+        <label for="country">Country:</label>
+        <input type="text" name="country" id="country">
+        <input type="hidden" name="secret" value="this is the secret">
+        <input type="submit" value="Add User">
+    </form>
+    
+</body>
+</html>
+
