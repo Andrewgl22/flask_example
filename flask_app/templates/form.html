@@ -9,6 +9,13 @@
     <h1>Welcome {{session['user']}}, Register a new user!</h1>
 
     <form action="/user" method="post">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{message}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
         <label for="user_name">Username:</label>
         <input type="text" name="username" id="user_name">
         <label for="email">Email:</label>

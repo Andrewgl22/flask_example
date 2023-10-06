@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        {% for user in users %}
+            <div>
+                <h1>{{user.first_name}}{{user.last_name}}</h1>
+                {% for book in user.books %}
+                <div>
+                    <p>--{{book.title}}</p>
+                    <p>--{{book.author}}</p>
+                </div>
+
+                {% endfor %}
+            </div>
+        {% endfor %}
+</body>
+</html>

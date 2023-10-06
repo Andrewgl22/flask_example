@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Edit book information!</h1>
+
+    <form action="/book/update" method="post">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{message}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <label for="title">Title:</label>
+        <input type="text" name="title" id="title" value="{{book.title}}">
+        <label for="author">Author:</label>
+        <input type="text" name="author" id="author" value="{{book.author}}">
+        <label for="num_pages">Num_pages:</label>
+        <input type="number" name="num_pages" id="num_pages" value="{{book.num_pages}}">
+        <input type="hidden" name="id" value="{{book.id}}">
+        <input type="submit" value="Add User">
+    </form>
+    
+</body>
+</html>
