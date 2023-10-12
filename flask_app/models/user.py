@@ -17,7 +17,7 @@ class User:
     def get_all(cls):
         query = "SELECT * FROM users"
         # connect to our specific db and query the database
-        result = connectToMySQL('user-test').query_db(query)
+        result = connectToMySQL('test-erd').query_db(query)
         # convert all results from list of dictionaries 
         # to list of class objects
         users = []
@@ -29,20 +29,20 @@ class User:
     @classmethod
     def save(cls,data): 
         query = "INSERT INTO users(first_name, last_name, email, password, created_at,updated_at) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s, Now(),Now());"
-        return connectToMySQL('user-test').query_db(query, data)  
+        return connectToMySQL('test-erd').query_db(query, data)  
     
     # Get One User by ID
     @classmethod
     def get_one_by_id(cls,data):
         query = "SELECT * FROM users WHERE id = %(id)s"
-        result = connectToMySQL('user-test').query_db(query,data)
+        result = connectToMySQL('test-erd').query_db(query,data)
         print("one user:", result)
         return cls(result[0])
     
     @classmethod
     def get_one_by_email(cls,data):
         query = "SELECT * FROM users WHERE email = %(email)s"
-        result = connectToMySQL('user-test').query_db(query,data)
+        result = connectToMySQL('test-erd').query_db(query,data)
         # if user with this email doesn't exist, return false
         if len(result) < 1:
             return False
@@ -57,19 +57,19 @@ class User:
             last_name = %(last_name)s, email = %(email)s, 
             updated_at = Now() WHERE id = %(id)s;
         """
-        return connectToMySQL("user-test").query_db(query,data)
+        return connectToMySQL("test-erd").query_db(query,data)
 
     # Delete User
 
     @classmethod
     def delete(cls,data):
         query = "DELETE FROM users WHERE id = %(id)s"
-        return connectToMySQL('user-test').query_db(query,data)
+        return connectToMySQL('test-erd').query_db(query,data)
     
     @classmethod
     def get_users_w_books(cls):
         query = "SELECT * FROM users JOIN books ON users.id = books.user_id"
-        results = connectToMySQL('user-test').query_db(query)
+        results = connectToMySQL('test-erd').query_db(query)
         print(results)
 
         if results:
@@ -85,10 +85,21 @@ class User:
                     "created_at":row['books.created_at'],
                     "updated_at":row['books.updated_at']
                 }
-
                 user.books.append(book.Book(data))
                 new_result.append(user)
             return new_result
+        
+    @classmethod
+    def get_all_users_who_favorited(cls,data):
+        query = "SELECT * FROM favorites JOIN users ON favorites.user_id = users.id WHERE favorites.book_id = %(id)s"
+        results = connectToMySQL('test-erd').query_db(query,data)
+        users = []
+        if results:
+            for row in results:
+                user = cls(row)
+                users.append(user)
+            return users
+        return users
 
 
 
